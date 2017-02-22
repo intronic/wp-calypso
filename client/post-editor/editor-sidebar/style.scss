@@ -1,5 +1,6 @@
 .post-editor__sidebar {
 	@extend .sidebar;
+	background: $white;
 
 	@include breakpoint( "<660px" ) {
 		position: relative;
