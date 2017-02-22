@@ -105,7 +105,7 @@ class EditPostStatus extends Component {
 			isSticky = this.props.post.sticky;
 			isPending = postUtils.isPending( this.props.post );
 			isPublished = postUtils.isPublished( this.props.savedPost );
-			isScheduled = this.props.savedPost.status === 'future';
+			isScheduled = this.props.savedPost && this.props.savedPost.status === 'future';
 			canPublish = siteUtils.userCan( 'publish_posts', this.props.site );
 		}
 
