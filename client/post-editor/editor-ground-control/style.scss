@@ -196,3 +196,13 @@
 .editor-ground-control__email-verification-notice-more {
 	text-decoration: underline;
 }
+
+.editor-ground-control__back.button.is-borderless {
+	border-right: 1px solid #c8d7e1;
+	padding: 12px 16px;
+	height: 57px;
+
+	.gridicon {
+		top: 4px;
+	}
+}
