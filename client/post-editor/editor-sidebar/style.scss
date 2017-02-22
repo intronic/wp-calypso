@@ -2,11 +2,16 @@
 	@extend .sidebar;
 	background: $white;
 	left: auto;
-	right: 0;
+	right: -272px;
 	border-left: 1px solid darken( $sidebar-bg-color, 5% );
 	border-top: 1px solid darken( $sidebar-bg-color, 5% );
 	border-right: none;
 	top: 112px;
+	transition: all 0.15s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+	.focus-sidebar & {
+		transform: translateX(-272px);
+	}
 
 	@include breakpoint( "<660px" ) {
 		position: relative;

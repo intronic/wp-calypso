@@ -24,6 +24,7 @@ const Card = require( 'components/card' ),
 
 import AsyncLoad from 'components/async-load';
 import EditorPublishButton, { getPublishButtonStatus } from 'post-editor/editor-publish-button';
+import Button from 'components/button';
 
 export default React.createClass( {
 	displayName: 'EditorGroundControl',
@@ -44,6 +45,7 @@ export default React.createClass( {
 		site: React.PropTypes.object,
 		user: React.PropTypes.object,
 		userUtils: React.PropTypes.object,
+		toggleSidebar: React.PropTypes.func,
 		type: React.PropTypes.string
 	},
 
@@ -368,6 +370,9 @@ export default React.createClass( {
 							site={ this.props.site }>
 						</EditPostStatus>
 				}
+				<div className="editor-ground-control__toggle-sidebar">
+					<Button onClick={ this.props.toggleSidebar }><Gridicon icon="cog" /> Document</Button>
+				</div>
 				<div className="editor-ground-control__action-buttons">
 					<button
 						className="editor-ground-control__preview-button button"
