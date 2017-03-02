@@ -55,6 +55,7 @@ import Site from 'blocks/site';
 import StatusLabel from 'post-editor/editor-status-label';
 import { editedPostHasContent } from 'state/selectors';
 import EditorGroundControl from 'post-editor/editor-ground-control';
+import { isMobile } from 'lib/viewport';
 
 export const PostEditor = React.createClass( {
 	propTypes: {
@@ -163,14 +164,15 @@ export const PostEditor = React.createClass( {
 			page.replace( nextProps.editPath, null, false, false );
 		}
 
-		if ( nextProps.siteId !== siteId ) {
+		if ( nextProps.siteId !== siteId ||
+			( nextProps.siteId === siteId && nextProps.postId !== postId ) ) {
 			this.useDefaultSidebarFocus( nextProps );
 		}
 	},
 
 	useDefaultSidebarFocus( nextProps ) {
 		const props = nextProps || this.props;
-		if ( props.editorSidebarPreference === 'open' || props.hasBrokenPublicizeConnection ) {
+		if ( ! isMobile() && ( props.editorSidebarPreference === 'open' || props.hasBrokenPublicizeConnection ) ) {
 			this.props.setLayoutFocus( 'sidebar' );
 		}
 	},
@@ -673,7 +675,6 @@ export const PostEditor = React.createClass( {
 
 	onPublishFailure: function( error ) {
 		this.onSaveFailure( error, 'publishFailure' );
-		this.toggleSidebar();
 	},
 
 	onPublishSuccess: function() {
@@ -689,7 +690,6 @@ export const PostEditor = React.createClass( {
 		}
 
 		this.onSaveSuccess( message, ( message === 'published' ? 'view' : 'preview' ), savedPost.URL );
-		this.toggleSidebar();
 	},
 
 	onSaveFailure: function( error, message ) {
