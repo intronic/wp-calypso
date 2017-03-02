@@ -494,6 +494,59 @@ describe( 'reducer', () => {
 			} );
 		} );
 
+		it( 'should return site with false privacy setting if received blog_public of 1', () => {
+			const original = deepFreeze( {
+				2916284: {
+					ID: 2916284,
+					name: 'WordPress.com Example Blog',
+					is_private: true
+				}
+			} );
+			const state = items( original, {
+				type: SITE_SETTINGS_RECEIVE,
+				siteId: 2916284,
+				settings: {
+					blog_public: 1
+				}
+			} );
+
+			expect( state ).to.eql( {
+				2916284: {
+					ID: 2916284,
+					name: 'WordPress.com Example Blog',
+					is_private: false
+				}
+			} );
+		} );
+
+		it( 'should update both privacy and icon if received both setting updates', () => {
+			const original = deepFreeze( {
+				2916284: {
+					ID: 2916284,
+					name: 'WordPress.com Example Blog'
+				}
+			} );
+			const state = items( original, {
+				type: SITE_SETTINGS_RECEIVE,
+				siteId: 2916284,
+				settings: {
+					blog_public: 1,
+					site_icon: 42
+				}
+			} );
+
+			expect( state ).to.eql( {
+				2916284: {
+					ID: 2916284,
+					name: 'WordPress.com Example Blog',
+					is_private: false,
+					icon: {
+						media_id: 42
+					}
+				}
+			} );
+		} );
+
 		it( 'should return same state if media deleted but not including site icon setting', () => {
 			const original = deepFreeze( {
 				2916284: {
