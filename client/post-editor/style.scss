@@ -45,10 +45,14 @@
 }
 
 .post-editor__content {
-	transition: margin 0.15s cubic-bezier(0.075, 0.82, 0.165, 1);
+	transition: all 0.15s cubic-bezier(0.075, 0.82, 0.165, 1);
+	margin: 0 auto;					// born centered, so when width collapses for sidebar anim it doesn't move
+	transform: translateX( 0 );		// born with translate
 	.focus-sidebar & {
 		@include breakpoint( ">660px" ) {
-			margin-right: 271px;
+			//margin-right: 271px;
+			width: calc( 100% - 272px );		// subtract sidebar width
+			transform: translateX( -136px );	// subtract half sidebar width, because it's centered
 		}
 	}
 }
