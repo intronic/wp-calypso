@@ -73,4 +73,13 @@ module.exports = {
 		defaultVariation: 'showMonthly',
 		allowExistingUsers: true
 	},
+
+	signupCopy: {
+		datestamp: '20170307',
+		variations: {
+            oldSignupCopy: 50,
+            newSignupCopy: 50
+        },
+        defaultVariation: 'oldSignupCopy'
+	},
 };
