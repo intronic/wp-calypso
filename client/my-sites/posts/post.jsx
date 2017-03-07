@@ -4,6 +4,7 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
+import { localize } from 'i18n-calypso';
 
 /**
  * Internal dependencies
@@ -37,7 +38,7 @@ function checkPropsChange( currentProps, nextProps, propArr ) {
 	return false;
 }
 
-module.exports = React.createClass( {
+const Post = React.createClass( {
 
 	displayName: 'Post',
 
@@ -123,18 +124,20 @@ module.exports = React.createClass( {
 	},
 
 	componentWillMount() {
+		const { translate } = this.props;
+
 		this.strings = {
-			trashing: this.translate( 'Trashing Post' ),
-			deleting: this.translate( 'Deleting Post' ),
-			trashed: this.translate( 'Moved to Trash' ),
-			undo: this.translate( 'undo?' ),
-			deleted: this.translate( 'Post Deleted' ),
-			updating: this.translate( 'Updating Post' ),
-			error: this.translate( 'Error' ),
-			updated: this.translate( 'Updated' ),
-			deleteWarning: this.translate( 'Delete this post permanently?' ),
-			restoring: this.translate( 'Restoring' ),
-			restored: this.translate( 'Restored' )
+			trashing: translate( 'Trashing Post' ),
+			deleting: translate( 'Deleting Post' ),
+			trashed: translate( 'Moved to Trash' ),
+			undo: translate( 'undo?' ),
+			deleted: translate( 'Post Deleted' ),
+			updating: translate( 'Updating Post' ),
+			error: translate( 'Error' ),
+			updated: translate( 'Updated' ),
+			deleteWarning: translate( 'Delete this post permanently?' ),
+			restoring: translate( 'Restoring' ),
+			restored: translate( 'Restored' )
 		};
 	},
 
@@ -308,3 +311,5 @@ module.exports = React.createClass( {
 	}
 
 } );
+
+export default localize( Post );
