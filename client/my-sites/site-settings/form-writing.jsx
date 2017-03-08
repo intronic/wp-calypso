@@ -112,7 +112,7 @@ class SiteSettingsFormWriting extends Component {
 
 							<ThemeEnhancements
 								onSubmitForm={ this.props.handleSubmitForm }
-								handleToggle={ handleToggle }
+								handleToggle={ handleAutosavingToggle }
 								isSavingSettings={ isSavingSettings }
 								isRequestingSettings={ isRequestingSettings }
 								fields={ fields }

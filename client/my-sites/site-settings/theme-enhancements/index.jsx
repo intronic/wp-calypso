@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
  */
 import SectionHeader from 'components/section-header';
 import Card from 'components/card';
-import Button from 'components/button';
 import JetpackModuleToggle from '../jetpack-module-toggle';
 import FormFieldset from 'components/forms/form-fieldset';
 import FormToggle from 'components/forms/form-toggle';
@@ -45,26 +44,11 @@ class ThemeEnhancements extends Component {
 
 	renderHeader() {
 		const {
-			onSubmitForm,
-			isSavingSettings,
 			translate
 		} = this.props;
-		const formPending = this.isFormPending();
 
 		return (
-			<SectionHeader label={ translate( 'Theme Enhancements' ) }>
-				<Button
-					compact
-					primary
-					onClick={ onSubmitForm }
-					disabled={ formPending }
-				>
-					{ isSavingSettings
-						? translate( 'Saving…' )
-						: translate( 'Save Settings' )
-					}
-				</Button>
-			</SectionHeader>
+			<SectionHeader label={ translate( 'Theme Enhancements' ) } />
 		);
 	}
 
