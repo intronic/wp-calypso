@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
  */
 import SectionHeader from 'components/section-header';
 import Card from 'components/card';
-import Button from 'components/button';
 import FormFieldset from 'components/forms/form-fieldset';
 import FormToggle from 'components/forms/form-toggle';
 import { getSelectedSite, getSelectedSiteId } from 'state/ui/selectors';
@@ -70,26 +69,11 @@ class CustomContentTypes extends Component {
 
 	renderHeader() {
 		const {
-			onSubmitForm,
-			isSavingSettings,
 			translate
 		} = this.props;
-		const formPending = this.isFormPending();
 
 		return (
-			<SectionHeader label={ translate( 'Custom Content Types' ) }>
-				<Button
-					compact
-					primary
-					onClick={ onSubmitForm }
-					disabled={ formPending }
-				>
-					{ isSavingSettings
-						? translate( 'Saving…' )
-						: translate( 'Save Settings' )
-					}
-				</Button>
-			</SectionHeader>
+			<SectionHeader label={ translate( 'Custom Content Types' ) } />
 		);
 	}
 
