@@ -13,6 +13,7 @@ import isEmpty from 'lodash/isEmpty';
  */
 import config from 'config';
 import route from 'lib/route';
+import { addQueryArgs } from 'lib/url';
 import analytics from 'lib/analytics';
 import SignupComponent from './main';
 import utils from './utils';
@@ -67,8 +68,8 @@ export default {
 	},
 
 	redirectToFlow( context, next ) {
-		if ( context.path !== utils.getValidPath( context.params ) ) {
-			return page.redirect( utils.getValidPath( context.params ) );
+		if ( context.pathname !== utils.getValidPath( context.params ) ) {
+			return page.redirect( addQueryArgs( context.query || {}, utils.getValidPath( context.params ) ) );
 		}
 
 		next();
