@@ -2,6 +2,7 @@
  * External dependencies
  */
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { localize } from 'i18n-calypso';
 import Gridicon from 'gridicons';
 
@@ -14,18 +15,30 @@ import { getFeaturedImageId } from 'lib/posts/utils';
 import Accordion from 'components/accordion';
 import EditorDrawerWell from 'post-editor/editor-drawer-well';
 import FeaturedImage from 'post-editor/editor-featured-image';
-import DropZone from 'components/drop-zone';
 import MediaActions from 'lib/media/actions';
 
 import Dispatcher from 'dispatcher';
+import { editPost } from 'state/posts/actions';
 
 class EditorDrawerFeaturedImage extends Component {
+	static propTypes = {
+		site: PropTypes.object,
+		post: PropTypes.object,
+		translate: PropTypes.func
+	};
+
+	state = {};
+
 	constructor( props ) {
 		super( props );
-		this.startSelecting = () => this.setState( { isSelecting: true } );
-		this.endSelecting = () => this.setState( { isSelecting: false } );
-		this.state = { isSelecting: false };
+
+		this.state = {
+			isSelecting: false
+		};
 	}
+
+	startSelecting = () => this.setState( { isSelecting: true } );
+	endSelecting = () => this.setState( { isSelecting: false } );
 
 	removeImage() {
 		PostActions.edit( {
@@ -37,7 +50,7 @@ class EditorDrawerFeaturedImage extends Component {
 	}
 
 	onFilesDrop = ( files ) => {
-		Dispatcher.register( function( payload ) {
+		Dispatcher.register( ( payload ) => {
 			const action = payload.action;
 
 			switch ( action.type ) {
@@ -50,7 +63,7 @@ class EditorDrawerFeaturedImage extends Component {
 						PostActions.edit( {
 							featured_image: action.data.ID
 						} );
-					}, 500 );
+					}, 0 );
 			}
 		} );
 
@@ -64,12 +77,13 @@ class EditorDrawerFeaturedImage extends Component {
 		return (
 			<Accordion
 				title={ translate( 'Featured Image' ) }
-				icon={ <Gridicon icon="image"/> }>
+				icon={ <Gridicon icon="image" /> }>
 				<EditorDrawerWell
 					icon="image"
 					label={ translate( 'Set Featured Image' ) }
 					empty={ ! site || ! post || ! getFeaturedImageId( post ) }
 					onClick={ this.startSelecting }
+					onFileDrop={ this.onFilesDrop }
 					onRemove={ this.removeImage }
 				>
 					<FeaturedImage
@@ -79,16 +93,11 @@ class EditorDrawerFeaturedImage extends Component {
 						post={ post }
 					/>
 				</EditorDrawerWell>
-				<DropZone onFilesDrop={ this.onFilesDrop }/>
 			</Accordion>
 		);
 	}
 }
 
-EditorDrawerFeaturedImage.propTypes = {
-	site: PropTypes.object,
-	post: PropTypes.object,
-	translate: PropTypes.func
-};
-
-export default localize( EditorDrawerFeaturedImage );
+export default connect( null, {
+	editPost
+} )( localize( EditorDrawerFeaturedImage ) );
