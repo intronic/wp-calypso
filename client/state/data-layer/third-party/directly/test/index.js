@@ -87,7 +87,7 @@ describe( 'Directly data layer', () => {
 		it( 'should dispatch an error action if initialization fails', ( done ) => {
 			initialize( store, action, next )
 				.then( () => expect( store.dispatch ).to.have.been.calledWith( { type: DIRECTLY_INITIALIZATION_ERROR } ) )
-				.then( done() );
+				.then( () => done() );
 
 			simulateInitializationError();
 		} );
